@@ -6,16 +6,16 @@ from pygame.locals import *
 from mineblock import *
 
 
-# 游戏屏幕的宽
+# 游戏屏幕的宽  SIZE表示块大小20
 SCREEN_WIDTH = BLOCK_WIDTH * SIZE
 # 游戏屏幕的高
 SCREEN_HEIGHT = (BLOCK_HEIGHT + 2) * SIZE
 
-
+#游戏状态
 class GameStatus(Enum):
-    readied = 1,
-    started = 2,
-    over = 3,
+    readied = 1,    #准备
+    started = 2,    #开始
+    over = 3,       
     win = 4
 
 
@@ -26,14 +26,15 @@ def print_text(screen, font, x, y, text, fcolor=(255, 255, 255)):
 
 def main():
     pygame.init()
+    #设置游戏界面大小
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pygame.display.set_caption('扫雷')
+    pygame.display.set_caption('扫雷游戏')
 
     font1 = pygame.font.Font('resources/a.TTF', SIZE * 2)  # 得分的字体
     fwidth, fheight = font1.size('999')
     red = (200, 40, 40)
 
-    # 加载资源图片，因为资源文件大小不一，所以做了统一的缩放处理
+    # 加载资源图片，表示雷的个数，因为资源文件大小不一，所以做了统一的缩放处理
     img0 = pygame.image.load('resources/0.bmp').convert()
     img0 = pygame.transform.smoothscale(img0, (SIZE, SIZE))
     img1 = pygame.image.load('resources/1.bmp').convert()
@@ -52,6 +53,7 @@ def main():
     img7 = pygame.transform.smoothscale(img7, (SIZE, SIZE))
     img8 = pygame.image.load('resources/8.bmp').convert()
     img8 = pygame.transform.smoothscale(img8, (SIZE, SIZE))
+
     img_blank = pygame.image.load('resources/blank.bmp').convert()
     img_blank = pygame.transform.smoothscale(img_blank, (SIZE, SIZE))
     img_flag = pygame.image.load('resources/flag.bmp').convert()
@@ -88,7 +90,9 @@ def main():
 
     bgcolor = (225, 225, 225)   # 背景色
 
+    print("set mines---")
     block = MineBlock()
+    
     game_status = GameStatus.readied
     start_time = None   # 开始时间
     elapsed_time = 0    # 耗时

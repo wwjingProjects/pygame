@@ -17,7 +17,7 @@ class BlockStatus(Enum):
     hint = 7    # 被双击的周围
     double = 8  # 正被鼠标左右键双击
 
-
+#雷
 class Mine:
     def __init__(self, x, y, value=0):
         self._x = x
